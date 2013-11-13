@@ -1,4 +1,4 @@
-(function(global, name, basePath) {
+(function(global, name) {
 	var head = document.getElementsByTagName("head")[0]; //@private | head tag cache
 		loadedModulesMap = {}, //@private | map of the already loaded or loading scripts;
 		namespace = null,
@@ -16,12 +16,11 @@
 	}
 
 	namespace.module = function(moduleName) {
-		var objects = moduleName.split('.'), //@private | ex moduleName: Sin.game.Game
+		var objects = moduleName.split('.'), //@private | example moduleName: Sin.game.Game
 			module = global; //@private | internal link to the module
 
 		for(var i = 0; i < objects.length - 1; i++) {
-			//makes sure each object in the moduleName is defined or sets it to an empty object.
-			//skips the 'Sin' part of the moduleName since this is already set
+			//makes sure each object in the moduleName is defined or set it to an empty object.
 			module = module[objects[i]] = module[objects[i]] || {};
 		}
 
@@ -33,7 +32,7 @@
 					modules = [modules];
 				}
 
-				var defenitionCallback = null, //@private | properties to set on the module
+				var defenitionCallback = null, //@private | the function to call after everything is loaded
 					modulesToLoad = 0; //@private | tracks the number of modules that need to be loaded (modules.length minus already loaded modules)
 
 				var loadModule = function (moduleName){
@@ -97,7 +96,7 @@
 			modules = [modules];
 		}
 
-		var defenitionCallback = null, //@private | properties to set on the module
+		var defenitionCallback = null, //@private | the function to call after everything is loaded
 			modulesToLoad = 0; //@private | tracks the number of modules that need to be loaded (modules.length minus already loaded modules)
 
 		var loadModule = function (moduleName){
